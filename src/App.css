@@ -1,38 +1,70 @@
-.App {
+.body {
+  font-family: sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+}
+
+.app {
   text-align: center;
+  margin-top: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* AutocompleteBox component  */
+.input-autocomplete-with-results {
+  background-color: aliceblue;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.autocomplete-box-input {
+  border: 1px solid #999;
+  border-radius: 5px;
+  padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+/* MatchesList component */
+.matches-list-title {
+  margin-bottom: 10px;
+  font-size: large;
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+.matches-list-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 400px;
+  min-height: 200px;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.matches {
+  margin-top: 15px;
+  overflow-y: auto;
+  padding-left: 0;
+}
+
+.matches li {
+  padding: 6px;
+}
+
+.no-matches {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* HighlightedText component */
+.match {
+  background-color: #fa5a42;
+}
+
+.match-char {
+  font-weight: bold;
+}
+
+.active-match,
+.match li:hover {
+  background-color: #e0f5ca;
+  cursor: pointer;
 }
