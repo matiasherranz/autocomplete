@@ -9,11 +9,8 @@ export const UserDetails: FC<Props> = ({ user }) => {
   return (
     <div className="user-details-wrapper">
       <div className="user-details">
-        <h1>Details of the selected user</h1>
+        <h1>{user.name}</h1>
         <ul>
-          <li>
-            <strong>Name:</strong> {user.name}
-          </li>
           <li>
             <strong>Username:</strong> {user.username}
           </li>

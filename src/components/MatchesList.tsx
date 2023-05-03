@@ -15,9 +15,6 @@ export const MatchesList: FC<Props> = ({
 }) => {
   return filteredMatches.length > 0 ? (
     <div className="matches-list-wrapper">
-      <p className="matches-list-title">
-        Users with first/last name matching your search:
-      </p>
       <ul className="matches">
         {filteredMatches.map((filteredMatch, index) => {
           return (

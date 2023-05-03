@@ -23,11 +23,6 @@
 }
 
 /* ************************* MatchesList component ************************* */
-.matches-list-title {
-  margin-bottom: 10px;
-  font-size: large;
-  font-weight: bold;
-}
 
 .matches-list-wrapper {
   position: relative;
@@ -146,7 +141,6 @@ button.button-link {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
   text-align: left;
   line-height: 2.5ch;
 }

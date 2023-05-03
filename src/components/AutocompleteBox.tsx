@@ -55,7 +55,7 @@ export const AutocompleteBox = () => {
         break
 
       case KeyCodes.ESCAPE:
-        // pressing escape should cleanup the suggestions box
+        // pressing escape should cleanup the matches list as well as the user details section, if open
         setShowResults(false)
         setFilteredMatches([])
         setUserInput('')
