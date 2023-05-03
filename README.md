@@ -48,6 +48,8 @@ ESLint comes installed with CRA, so we just need to add `prettier` last in the c
 
 > Docs: https://github.com/prettier/eslint-config-prettier#installation
 
+One last note on ESLint: I added the [sort-imports](https://eslint.org/docs/latest/rules/sort-imports) rule, that I find very positive for code quality.
+
 ### Development environment setup and code style considerations
 
 The main pieces of the code styling and standard-compliance setup I used are the following:
