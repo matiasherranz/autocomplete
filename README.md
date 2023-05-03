@@ -1,10 +1,78 @@
+# ReactJS Autocomplete Box component
+
+## TL;DR: How to run the project
+
+- Clone this repo,
+- Move to the base folder,
+- Install dependencies (typically with `npm install`),
+- And run the project! (`npm start`),
+- Then go to [localhost:3000](localhost:3000) on your browser to see the project in action!
+
+You can run the tests with `npm run test`.
+
+## Tech stack used and setting up the project dependencies
+
+### NodeJS
+
+The node version used is 20.o. To set it, I use `nvm` like this:
+
+```bash
+$ nvm use 20
+```
+
+The version number can be omitted (if sitting at the root of the repo), since I added an `.nvmrc` file. You can take a look [here](https://github.com/nvm-sh/nvm) to learn more about `nvm`, including setup instruction and full documentation.
+
+### Base stack
+
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). Then I configured Prettier with the built-in configuration os ESLint that it comes bundled with to get a good foundational preparation.
+
+To create the initial app with Create React App, using Typescript, I used this command:
+
+```
+npx create-react-app autocomplete --template typescript
+```
+
+Install Prettier:
+
+```
+npm install --save-dev --save-exact prettier
+```
+
+Finally, install `eslint-config-prettier` to make sure Prettier and ESLint play together nicely:
+
+```
+npm install --save-dev eslint-config-prettier
+```
+
+ESLint comes installed with CRA, so we just need to add `prettier` last in the config, in package.json, under the extends array of `eslintConfig` key.
+
+> Docs: https://github.com/prettier/eslint-config-prettier#installation
+
+### Development environment setup and code style considerations
+
+The main pieces of the code styling and standard-compliance setup I used are the following:
+
+- .gitignore: I used a standard .gitignore file from the [GitHub gitignore project](https://github.com/github/gitignore/blob/master/Node.gitignore),
+- prettier: ([link](https://prettier.io/)) A great code formatter that smoothly integrates with both editors and commit/push hooks,
+- eslint: ([link](https://eslint.org/)) ESLint statically analyzes your code to quickly find problems. Many problems ESLint finds can be automatically fixed. I set it up to work side-by-side with prettier.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Available Scripts (apart from the usual ones to start, build and run tests)
 
 In the project directory, you can run:
+
+### `npm run format`
+
+Runs Prettier and applies fixes to the issues it finds and can fix.
+
+### `npm run lint`
+
+Runs ESLint and tries to fix any violations it finds.
+
+And the usual ones:
 
 ### `npm start`
 
@@ -29,17 +97,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
+## Further Reading
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
