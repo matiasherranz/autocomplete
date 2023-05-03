@@ -10,6 +10,8 @@
 
 You can run the tests with `npm run test`.
 
+https://user-images.githubusercontent.com/485403/235988371-7b391500-df43-44e4-8417-b8329f615ad0.mov
+
 ## Tech stack used and setting up the project dependencies
 
 ### NodeJS
