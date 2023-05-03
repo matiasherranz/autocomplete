@@ -1,13 +1,10 @@
+import './App.css'
 import { AutocompleteBox } from './components/AutocompleteBox'
 
-import './App.css'
-
-const App = () => {
+export const App = () => {
   return (
     <div className="app">
       <AutocompleteBox />
     </div>
   )
 }
-
-export default App
