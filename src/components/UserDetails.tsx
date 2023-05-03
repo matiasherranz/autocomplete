@@ -1,11 +1,14 @@
 import { FC } from 'react'
+
 import { UserData } from '../models'
 
 interface Props {
-  user: UserData
+  user?: UserData
 }
 
 export const UserDetails: FC<Props> = ({ user }) => {
+  if (!user) return null
+
   return (
     <div className="user-details-wrapper">
       <div className="user-details">

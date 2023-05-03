@@ -1,17 +1,21 @@
 import { FC } from 'react'
+
 import { UserData } from '../models'
+
 import { HighlightedText } from './HighlightedText'
 
 type Props = {
   filteredMatches: UserData[]
   userInput: string
   selectedIndex: number
+  setActiveMatchIndex: (index: number) => void
 }
 
 export const MatchesList: FC<Props> = ({
   filteredMatches,
   userInput,
   selectedIndex,
+  setActiveMatchIndex,
 }) => {
   return filteredMatches.length > 0 ? (
     <div className="matches-list-wrapper">
@@ -21,11 +25,12 @@ export const MatchesList: FC<Props> = ({
             <li
               key={index}
               className={selectedIndex === index ? 'selected-match' : ''}
+              onClick={() => setActiveMatchIndex(index)}
             >
               <HighlightedText
                 key={index}
-                text={filteredMatch.name}
                 highlight={userInput}
+                text={filteredMatch.name}
               />
             </li>
           )

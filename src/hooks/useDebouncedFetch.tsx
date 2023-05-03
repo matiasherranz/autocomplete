@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import { UserData } from '../models'
 
 // A simple API with a single endpoint that returns a list of users.

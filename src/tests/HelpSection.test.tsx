@@ -1,6 +1,7 @@
 // Tests for HelpSection component:
 
 import { render, screen } from '@testing-library/react'
+
 import { HelpSection } from '../components/HelpSection'
 
 describe('HelpSection', () => {

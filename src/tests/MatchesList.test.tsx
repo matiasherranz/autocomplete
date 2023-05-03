@@ -1,6 +1,7 @@
 // Tests for the MatchesList component:
 
 import { render, screen } from '@testing-library/react'
+
 import { MatchesList } from '../components/MatchesList'
 import { UserData } from '../models'
 
@@ -24,7 +25,12 @@ describe('MatchesList', () => {
 
   it('should render the matches list', () => {
     render(
-      <MatchesList filteredMatches={matches} userInput="j" selectedIndex={0} />
+      <MatchesList
+        filteredMatches={matches}
+        selectedIndex={0}
+        setActiveMatchIndex={() => console.log('noop')}
+        userInput="j"
+      />
     )
 
     expect(screen.getAllByText(/Doe/i).length).toBe(2)
@@ -33,7 +39,12 @@ describe('MatchesList', () => {
 
   it('should render the matches list with no matches', () => {
     render(
-      <MatchesList filteredMatches={[]} userInput="nomatch" selectedIndex={0} />
+      <MatchesList
+        filteredMatches={[]}
+        selectedIndex={0}
+        setActiveMatchIndex={() => console.log('noop')}
+        userInput="nomatch"
+      />
     )
 
     expect(screen.getByText(/No matches for your input/i)).toBeInTheDocument()

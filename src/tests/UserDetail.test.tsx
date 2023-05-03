@@ -1,6 +1,7 @@
 // Tests for UserDetail component
 
 import { render, screen } from '@testing-library/react'
+
 import { UserDetails } from '../components/UserDetails'
 import { UserData } from '../models'
 

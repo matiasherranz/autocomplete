@@ -14,31 +14,43 @@ export const HelpSection: FC<Props> = ({ isOpen, onClose }) => {
         <span className="close" onClick={onClose}>
           &times;
         </span>
-        Here you can find some help!
+
         <ul>
           <li>
-            <strong>Search:</strong> type something in the input field to search
-            for users. You can search by first name, last name or both.
+            <strong>Search</strong>
+            <p>
+              Type something in the input field to search for users. You can
+              search by first name, last name or both.
+            </p>
           </li>
           <li>
-            <strong>Highlighted matches:</strong> If the search matches any
-            users (by first name, last name or both), the matches will be
-            highlighted in the results.
+            <strong>Highlighted matches</strong>
+            <p>
+              If the search matches any users (by first name, last name or
+              both), the matches will be highlighted in the results.
+            </p>
           </li>
           <li>
-            <strong>Navigate:</strong> You can navigate the results with the
-            <code> up/down arrow keys</code>. You can also select a result by
-            pressing <code>enter</code>.
+            <strong>Navigate</strong>
+            <p>
+              You can navigate the results with the
+              <code> up/down arrow keys</code>. You can also select a result by
+              pressing <code>enter</code>. Mouse navigation is also supported.
+            </p>
           </li>
           <li>
-            <strong>Select:</strong> You can also select a result by pressing{' '}
-            <code>enter</code>. Once you select a user, you'll be able to see
-            their full details.
+            <strong>Select</strong>
+            <p>
+              You can also select a result by pressing <code>enter</code>. Once
+              you select a user, you'll be able to see their full details.
+            </p>
           </li>
           <li>
-            <strong>Cleanup:</strong> You can clean the search terms you typed
-            by either deleting or more conveniently by pressing the{' '}
-            <code>escape</code> key.
+            <strong>Cleanup</strong>
+            <p>
+              You can clean the search terms you typed by either deleting or
+              more conveniently by pressing the <code>escape</code> key.
+            </p>
           </li>
         </ul>
       </div>
