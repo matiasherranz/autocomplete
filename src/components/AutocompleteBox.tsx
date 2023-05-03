@@ -1,31 +1,21 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { UserData } from '../models'
-import useDebouncedFetch from '../hooks/useDebouncedFetch'
+import { useDebouncedFetch } from '../hooks/useDebouncedFetch'
 import { KeyCodes } from '../constants'
 import { MatchesList } from './MatchesList'
-
-// A simple API with a single endpoint that returns a list of users.
-const API_URL = 'https://jsonplaceholder.typicode.com/users'
-const DELAY = 150 // milliseconds
+import { HelpSection } from './HelpSection'
 
 export const AutocompleteBox = () => {
-  const {
-    isLoading,
-    data: usersList,
-    error: fetchError,
-    setSearchTerm,
-  } = useDebouncedFetch(API_URL, DELAY)
-
   const [activeMatchIndex, setActiveMatchIndex] = useState<number>(0)
   const [filteredMatches, setFilteredMatches] = useState<UserData[]>([])
   const [userInput, setUserInput] = useState('')
-
   const [showResults, setShowResults] = useState(false)
+  const [showHelp, setShowHelp] = useState(false)
 
-  const wrapperRef = useRef<HTMLDivElement>(null)
+  const { isLoading, data: usersList, error: fetchError } = useDebouncedFetch()
 
   useEffect(() => {
-    if (!fetchError && usersList && usersList.length > 0) {
+    if (!fetchError && usersList && usersList.length > 0 && userInput) {
       const filteredMatches = usersList.filter((user) => {
         const userName = user.name.toLowerCase()
         const input = userInput.toLowerCase()
@@ -36,51 +26,23 @@ export const AutocompleteBox = () => {
     }
   }, [fetchError, userInput, usersList])
 
-  // detects click outside the input to close it / clean data
-  // useEffect(() => {
-  //   const handleClickOutside = (event) => {
-  //     if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-  //       setFilteredMatches([])
-  //       setShowResults(false)
-  //     }
-  //   }
+  const handleSearch = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    const userInput = e.currentTarget.value
 
-  //   // Bind the event listener
-  //   document.addEventListener('mousedown', handleClickOutside)
-  //   return () => {
-  //     // Unbind the event listener on clean up
-  //     document.removeEventListener('mousedown', handleClickOutside)
-  //   }
-  // }, [wrapperRef])
+    // If the user cleared the input, we clean the suggestions
+    if (!userInput || userInput.length === 0) {
+      setFilteredMatches([])
+      setShowResults(false)
+      setActiveMatchIndex(0)
+    }
 
-  const handleSearch = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      const userInput = e.currentTarget.value
-      if (userInput && userInput.length > 0) setSearchTerm(userInput)
+    setUserInput(userInput)
+  }, [])
 
-      // If the user cleared the input, we clean the suggestions
-      if (!userInput || userInput.length === 0) {
-        setFilteredMatches([])
-        setShowResults(false)
-      }
-
-      setUserInput(userInput)
-    },
-    [setSearchTerm]
-  )
-
-  // const onClick = (e: {
-  //   currentTarget: { innerText: React.SetStateAction<string> }
-  // }) => {
-  //   setUserInput(e.currentTarget.innerText)
-  //   setFilteredMatches([])
-  //   setActiveMatchIndex(0)
-  //   setShowResults(false)
-  // }
-
-  console.log('activeMatchIndex', activeMatchIndex)
   // Keyboard accessibility events
   const onKeyDown = (e: { keyCode: number }) => {
+    if (!userInput || !filteredMatches || filteredMatches.length === 0) return
+
     switch (e.keyCode) {
       case KeyCodes.ENTER:
         if (!activeMatchIndex) return
@@ -95,19 +57,24 @@ export const AutocompleteBox = () => {
         // pressing escape should cleanup the suggestions box
         setShowResults(false)
         setFilteredMatches([])
+        setUserInput('')
         break
 
       case KeyCodes.UP_ARROW:
-        if (activeMatchIndex === 0) return
-        setActiveMatchIndex(activeMatchIndex - 1)
+        if (activeMatchIndex === 0) {
+          setActiveMatchIndex(filteredMatches.length - 1)
+        } else {
+          setActiveMatchIndex(activeMatchIndex - 1)
+        }
+
         break
 
       case KeyCodes.DOWN_ARROW:
-        if (activeMatchIndex - 1 === filteredMatches.length) {
+        if (activeMatchIndex === filteredMatches.length - 1) {
           // if no active match or on the last one, set it to the first one
           setActiveMatchIndex(0)
         } else {
-          setActiveMatchIndex(activeMatchIndex - 1)
+          setActiveMatchIndex(activeMatchIndex + 1)
         }
         break
 
@@ -117,7 +84,7 @@ export const AutocompleteBox = () => {
   }
 
   return (
-    <div className="autocomplete-box-wrapper" ref={wrapperRef}>
+    <div className="autocomplete-box-wrapper">
       <input
         type="text"
         value={userInput}
@@ -130,14 +97,27 @@ export const AutocompleteBox = () => {
         }`}
         placeholder="Type to search and filter users..."
       />
-      {isLoading && <p>Loading...</p>}
 
+      <div className="help-link">
+        Need help?{' '}
+        <button
+          className="button-link"
+          type="submit"
+          onClick={() => setShowHelp(true)}
+        >
+          Click here!
+        </button>
+      </div>
+      {isLoading && <p>Loading users data...</p>}
       {showResults && (
-        <MatchesList filteredMatches={filteredMatches} userInput={userInput} />
+        <MatchesList
+          filteredMatches={filteredMatches}
+          userInput={userInput}
+          selectedIndex={activeMatchIndex}
+        />
       )}
-
-      {/* {usersList && <p>{JSON.stringify(usersList.map((u) => u.name))}</p>} */}
       {fetchError && <p>{fetchError}</p>}
+      <HelpSection isOpen={showHelp} onClose={() => setShowHelp(false)} />
     </div>
   )
 }
