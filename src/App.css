@@ -43,6 +43,10 @@
   padding: 6px;
 }
 
+.matches li:hover {
+  background-color: aquamarine;
+}
+
 .no-matches {
   position: absolute;
   top: 50%;
@@ -104,7 +108,7 @@ button.button-link {
 }
 
 .help-content {
-  background-color: #dddbca;
+  background-color: #ecf3b7;
   margin: auto;
   padding: 20px;
   border: 1px solid #888;
