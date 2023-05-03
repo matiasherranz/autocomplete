@@ -25,11 +25,73 @@
     "lint": "eslint ./ --fix"
   },
   "eslintConfig": {
+    "plugins": [
+      "import"
+    ],
     "extends": [
       "react-app",
       "react-app/jest",
       "prettier"
-    ]
+    ],
+    "rules": {
+      "import/no-default-export": [
+        "warn"
+      ],
+      "import/order": [
+        "error",
+        {
+          "groups": [
+            "builtin",
+            "external",
+            "internal",
+            "parent",
+            "sibling",
+            "index",
+            "object"
+          ],
+          "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "builtin",
+              "position": "before"
+            },
+            {
+              "pattern": "@testing-library/*",
+              "group": "external",
+              "position": "after"
+            },
+            {
+              "pattern": "**/**.*css",
+              "group": "object",
+              "position": "after"
+            },
+            {
+              "pattern": "./**.scss",
+              "group": "object",
+              "position": "after"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [
+            "react"
+          ],
+          "newlines-between": "always",
+          "alphabetize": {
+            "order": "asc",
+            "caseInsensitive": true
+          },
+          "warnOnUnassignedImports": true
+        }
+      ],
+      "react/jsx-sort-props": [
+        "warn",
+        {
+          "callbacksLast": true,
+          "shorthandFirst": true,
+          "noSortAlphabetically": false,
+          "reservedFirst": true
+        }
+      ]
+    }
   },
   "browserslist": {
     "production": [
