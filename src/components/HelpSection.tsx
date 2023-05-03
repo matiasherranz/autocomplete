@@ -32,7 +32,8 @@ export const HelpSection: FC<Props> = ({ isOpen, onClose }) => {
           </li>
           <li>
             <strong>Select:</strong> You can also select a result by pressing{' '}
-            <code>enter</code>.
+            <code>enter</code>. Once you select a user, you'll be able to see
+            their full details.
           </li>
           <li>
             <strong>Cleanup:</strong> You can clean the search terms you typed
