@@ -4,6 +4,7 @@ import { useDebouncedFetch } from '../hooks/useDebouncedFetch'
 import { KeyCodes } from '../constants'
 import { MatchesList } from './MatchesList'
 import { HelpSection } from './HelpSection'
+import { UserDetails } from './UserDetails'
 
 export const AutocompleteBox = () => {
   const [activeMatchIndex, setActiveMatchIndex] = useState<number>(0)
@@ -11,6 +12,7 @@ export const AutocompleteBox = () => {
   const [userInput, setUserInput] = useState('')
   const [showResults, setShowResults] = useState(false)
   const [showHelp, setShowHelp] = useState(false)
+  const [showUserDetails, setShowUserDetails] = useState(false)
 
   const { isLoading, data: usersList, error: fetchError } = useDebouncedFetch()
 
@@ -45,12 +47,11 @@ export const AutocompleteBox = () => {
 
     switch (e.keyCode) {
       case KeyCodes.ENTER:
-        if (!activeMatchIndex) return
-
         // pressing enter should select the active match
         setActiveMatchIndex(0)
         setShowResults(false)
         setUserInput(filteredMatches[activeMatchIndex].name)
+        setShowUserDetails(true)
         break
 
       case KeyCodes.ESCAPE:
@@ -58,6 +59,7 @@ export const AutocompleteBox = () => {
         setShowResults(false)
         setFilteredMatches([])
         setUserInput('')
+        setShowUserDetails(false)
         break
 
       case KeyCodes.UP_ARROW:
@@ -109,6 +111,8 @@ export const AutocompleteBox = () => {
         </button>
       </div>
       {isLoading && <p>Loading users data...</p>}
+
+      {/* List of filtered results: */}
       {showResults && (
         <MatchesList
           filteredMatches={filteredMatches}
@@ -116,8 +120,17 @@ export const AutocompleteBox = () => {
           selectedIndex={activeMatchIndex}
         />
       )}
-      {fetchError && <p>{fetchError}</p>}
+
+      {/* Detail view of the selected user */}
+      {showUserDetails && (
+        <UserDetails user={filteredMatches[activeMatchIndex]} />
+      )}
+
+      {/* Help section: */}
       <HelpSection isOpen={showHelp} onClose={() => setShowHelp(false)} />
+
+      {/* API error: */}
+      {fetchError && <p>{fetchError}</p>}
     </div>
   )
 }
