@@ -116,7 +116,9 @@ export const AutocompleteBox = () => {
           'input-autocomplete-with-results'
         }`}
         placeholder="Type to search and filter users..."
-        type="text"
+        // Using type="search" will show a clear button on the right side of the input
+        type="search"
+        // type="text"
         value={userInput}
         onChange={handleSearch}
         onKeyDown={onKeyDown}
