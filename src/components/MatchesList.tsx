@@ -23,7 +23,7 @@ export const MatchesList: FC<Props> = ({
         {filteredMatches.map((filteredMatch, index) => {
           return (
             <li
-              key={index}
+              key={`match-list-${index}`}
               className={selectedIndex === index ? 'selected-match' : ''}
               onClick={() => setActiveMatchIndex(index)}
             >
